@@ -1,78 +1,71 @@
+""""
+Sahil Patel CIS106 May 2, 2024
+This program reads a set of data representing a series of numeric measurements. The program will display the data, first unsorted and then sorted, and then compute and display various statistics about the data set. In addition, the program will compute and display the statistics for the set of data.
+"""
 
+def print_list(title, data):
+    print(title)
+    for i in range(0, len(data)):
+        print(f'{data[i]:8.2f}', end=' ') 
+     #Each value has 2 decimal places
+        if (i + 1) % 8 == 0: 
+          # 8 values should display from file
+            print() 
+          # Move to the next line after displaying 8 values
+    print() 
+  
 
+def sort_list(data):
+    for i in range(len(data)):
+        min_idx = i
+        for j in range(i+1, len(data)):
+            if data[j] < data[min_idx]:
+                min_idx = j
+        data[i], data[min_idx] = data[min_idx], data[i]
 
-import cmath
+def mean(data):
+    return sum(data) / len(data)
 
-
-#The function get_a(); will be the a coefficent of the prabola. We will do a while true statment
-def get_a():
-  while True:
-    a = float(input("Enter the a coefficent (a non zero value):"))
-    if a == 0:
-      print("Error and Try Again")
+def median(data):
+    n = len(data)
+    if n % 2 == 0:
+        return (data[n//2 - 1] + data[n//2]) / 2
     else:
-      return a
-      break
+        return data[n//2]
 
-
-#Return values of equations
-def xvertex(a, b, c):
-
-  x = -b / (2 * a)
-  return x
-
-
-def yvertex(a, b, c):
-
-  xtex = xvertex(a, b, c)
-  yvertex = (a * cmath.sqrt(xtex)) + (b * xtex) + c
- 
-  return yvertex
-
-
-def concavity(a):
-  if a > 0:
-    print("The parabola opens upward")
-  elif a < 0:
-    print("The parabola opens downward")
-
-
-#Discriminant for abc
-def discrimiant(a, b, c):
-  d = (b**2) - (4 * a * c)
-  sol1 = (-b - cmath.sqrt(d)) / (2 * a)
-  sol2 = (-b + cmath.sqrt(d)) / (2 * a)
-  print("The solutions are {0}, {1}".format(sol1, sol2))
-  return d
-
-
-#Roots
-def print_roots(a, b, c):
-  d = discrimiant(a, b, c)
-  if d > 0:
-    root1 = (-b + cmath.sqrt(discrimaint)) / (2 * a)
-    root2 = (-b - cmath.sqrt(discrimaint)) / (2 * a)
-    print("X1 root coordinate:", root.real)
-    print("X2 root coordinate:", root.real)
-  elif d == 0:
-    root = -b / (2 * a)
-    print("X1 root coordinate:", root.real)
-  else:
-    print("The parabola has no real roots")
-
+def build_list(filename, number_list):
+    infile = open(filename, 'r')
+    text = infile.readline()
+    while text != '':
+        number_list.append(float(text)) 
+      # TXT to float before appendings
+        text = infile.readline()
+    infile.close()
+    return number_list
 
 def main():
-  a = get_a()
-  b = float(input("Enter the b coefficent :"))
-  c = float(input("Enter the c coefficent :"))
-  print("Quadratic Equation Analyzer")
-  print(a)
-  print(b)
-  print(c)
-  x = xvertex(a, b, c)
-  print(x)
-  y = yvertex(a,b,c)
-  print(y)
-  concavity(a)
-  print_roots(a, b, c)
+    filename = "progs7_nums.txt"
+    unsorted_list = [] 
+  #Needs an empty list for unsorted data
+    unsorted_list = build_list(filename, unsorted_list)
+
+    #Lines 50 to 53 is unsorted data list
+    title = "Unsorted List"
+    print_list(title, unsorted_list)
+
+    sorted_list = unsorted_list.copy() 
+  
+    # ascend the list 
+    sort_list(sorted_list)
+    title = "Sorted List (Ascending)"
+    print_list(title, sorted_list)
+
+    # Mean and median values 
+    mean_value = mean(sorted_list)
+    print("Mean:", mean_value)
+
+    #Calculating the mean and median values
+    median_value = median(sorted_list)
+    print("Median:", median_value)
+
 main()
