@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    
+    <title>Cube and Squaring numbers</title>
+       
+        <style>
+            .nice{
+                font-style: italic;
+                font-size: larger;
+                font-family:' Times New Roman';
+                background-color: aqua;
+            }
+        </style>
+<!---Here I created a css class by giving the div tag an class attribute
+and then created it internally by using .nice then applying css and I did
+link my css file here with background color changed-->
+
+</head>
+<body>
+    <header>
+    <h1>Assignment 5, Page 2</h1>
+    </header>
+    <main>
+        <input type="text" id="squaringNumber">
+        <input type="button" value="square" onclick="squareNumber()">
+        <input type="text" id="cubingNumber">
+        <input type="button" value="cube" onclick="cubeNumber()">
+        <div id="results" class="nice" style="color:#ff0000"></div>
+        <!--I created different types of forms, a button and text for users
+        to enter. Then I created a div tag and applied an id to it with an
+        inline style.-->
+     </main>
+    <script>
+        function squareNumber(){
+            var firstNumber = document.getElementById("squaringNumber").value;
+            var numberSquare = Math.pow(firstNumber, 2);
+            document.getElementById("results").innerHTML = numberSquare;
+        }
+
+        function cubeNumber(){
+            var cubedNumber = document.getElementById("cubingNumber").value;
+            var numberCube = Math.pow(cubedNumber, 3);
+            document.getElementById("results").innerHTML = numberCube;
+            //Here I have created two functions for squaring a number, and
+            //cubing the number. For example if user types in 2 for square
+            //result will be 4, and if it were 3 for cubed then the result
+            //will be 27.
+        }
+    </script>
+</body>
+</html>
